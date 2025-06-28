@@ -31,12 +31,19 @@ class AuthController {
         }
 
         data.user?.save({ validateBeforeSave: false });
+        
+        // Configure cookie options for production
+        const cookieOptions = {
+            maxAge: 18000000, // 5 hours
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production', // Only use secure in production
+            sameSite: (process.env.NODE_ENV === 'production' ? 'none' : 'lax') as 'none' | 'lax',
+            domain: process.env.NODE_ENV === 'production' ? undefined : undefined // Let browser handle domain
+        };
+
         return res
             .status(201)
-            .cookie("accessToken", accessToken, {
-                maxAge: 18000000, //5 hours
-            }
-            )
+            .cookie("accessToken", accessToken, cookieOptions)
             .json(
                 new ApiResponse(
                     201,
@@ -65,11 +72,17 @@ class AuthController {
                 .json(new ApiError(401, "Error creating access token"));
         }
 
+        // Configure cookie options for production
+        const cookieOptions = {
+            maxAge: 18000000, // 5 hours
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production', // Only use secure in production
+            sameSite: (process.env.NODE_ENV === 'production' ? 'none' : 'lax') as 'none' | 'lax',
+            domain: process.env.NODE_ENV === 'production' ? undefined : undefined // Let browser handle domain
+        };
+
         return res
-            .cookie("accessToken", accessToken, {
-                maxAge: 18000000, //5 hours
-            }
-            )
+            .cookie("accessToken", accessToken, cookieOptions)
             .json(
                 new ApiResponse(
                     200,
@@ -110,11 +123,19 @@ class AuthController {
     }
 
     async logout(req: Request, res: Response) {
+        // Configure cookie options for production
+        const cookieOptions = {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: (process.env.NODE_ENV === 'production' ? 'none' : 'lax') as 'none' | 'lax',
+            domain: process.env.NODE_ENV === 'production' ? undefined : undefined
+        };
+
         // Your logout logic here
         // remove access tokens
         return res
             .status(200)
-            .clearCookie("accessToken")
+            .clearCookie("accessToken", cookieOptions)
             .json(
                 new ApiResponse(
                     200,

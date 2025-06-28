@@ -51,7 +51,7 @@ export class ContestService {
     }
 
     async getContestDeadline(contestId: string) {
-        const response = await fetch(`${this.url}/api/v1/contests/getContestDeadline/${contestId}`, {
+        const response = await fetch(`${this.url}/api/v1/contests/deadline/${contestId}`, {
             method: "GET",
             credentials: "include",
             headers: {
@@ -62,7 +62,7 @@ export class ContestService {
     }
 
     async updateContest(contestId: string, contest: any) {
-        const response = await fetch(`${this.url}/api/v1/contests/${contestId}`, {
+        const response = await fetch(`${this.url}/api/v1/contests/update/${contestId}`, {
             method: "PUT",
             credentials: "include",
             headers: {

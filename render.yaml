@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: bytecontest-backend
+    env: node
+    plan: free
+    buildCommand: cd server && npm install && npm run build
+    startCommand: cd server && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 8000
+      - key: MONGODB_URI
+        sync: false
+      - key: DB_NAME
+        sync: false
+      - key: ACCESS_TOKEN_SECRET
+        sync: false
+      - key: ACCESS_TOKEN_EXPIRY
+        value: 5h
+      - key: CORS_ORIGIN
+        sync: false
+      - key: RAPIDAPI_URL
+        value: https://judge0-ce.p.rapidapi.com
+      - key: RAPIDAPI_HOST
+        value: judge0-ce.p.rapidapi.com
+      - key: RAPIDAPI_KEY
+        sync: false 

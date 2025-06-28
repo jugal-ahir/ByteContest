@@ -5,8 +5,11 @@ export class AuthService {
     constructor() {
         this.url = import.meta.env.VITE_SERVER_URL;
     }
-    async register(user: User) {
-        const reqBody = { userEmail: user.userEmail, userPassword: user.userPassword, userName: user.userName, userRollNumber: user.userRollNumber, userSection: user.userSection };
+
+    async register(data: User) {
+        console.log("from authService: ", data);
+        console.log(this.url);
+        const reqBody = { userEmail: data.userEmail, userPassword: data.userPassword, userName: data.userName, userRollNumber: data.userRollNumber, userSection: data.userSection, userTeamName: data.userTeamName };
         const response = await fetch(`${this.url}/api/v1/auth/register`, {
             method: "POST",
             credentials: "include",
@@ -15,8 +18,7 @@ export class AuthService {
             },
             body: JSON.stringify(reqBody),
         });
-        if (response.status === 201)
-            return this.login(user);
+        console.log(document.cookie)
         return response.json();
     }
 
@@ -54,6 +56,7 @@ export class AuthService {
     async logout() {
         const response = await fetch(`${this.url}/api/v1/auth/logout`, {
             method: "POST",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + getCookie("accessToken"),

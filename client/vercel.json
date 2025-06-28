@@ -1,5 +1,13 @@
 {
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "rewrites": [
     { "source": "/(.*)", "destination": "/" }
-  ]
+  ],
+  "env": {
+    "VITE_SERVER_URL": "@vite_server_url",
+    "VITE_RAPIDAPI_URL": "@vite_rapidapi_url",
+    "VITE_RAPIDAPI_HOST": "@vite_rapidapi_host",
+    "VITE_RAPIDAPI_KEY": "@vite_rapidapi_key"
+  }
 }

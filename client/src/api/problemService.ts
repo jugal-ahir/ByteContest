@@ -11,6 +11,7 @@ class ProblemService {
         const response = await fetch(`${this.url}/api/v1/problems/all`,
             {
                 method: "GET",
+                credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + getCookie("accessToken"),
@@ -28,6 +29,7 @@ class ProblemService {
         const response = await fetch(`${this.url}/api/v1/problems/${problemId}`,
             {
                 method: "GET",
+                credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + getCookie("accessToken"),
@@ -41,6 +43,7 @@ class ProblemService {
         const response = await fetch(`${this.url}/api/v1/problems/practice/${problemId}`,
             {
                 method: "GET",
+                credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + getCookie("accessToken"),
@@ -54,6 +57,7 @@ class ProblemService {
         const response = await fetch(`${this.url}/api/v1/problems/${problemId}/${problemIsHidden}`,
             {
                 method: "PUT",
+                credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + getCookie("accessToken"),
@@ -68,6 +72,7 @@ class ProblemService {
         const response = await fetch(`${this.url}/api/v1/problems/editorial/${editorialId}`,
             {
                 method: "GET",
+                credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + getCookie("accessToken"),
@@ -82,6 +87,7 @@ class ProblemService {
         const response = await fetch(`${this.url}/api/v1/problems/editorial/${problemId}/${problemEditorialIsHidden}`,
             {
                 method: "PUT",
+                credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + getCookie("accessToken"),
@@ -96,6 +102,7 @@ class ProblemService {
         const response = await fetch(`${this.url}/api/v1/problems/create`,
             {
                 method: "POST",
+                credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + getCookie("accessToken"),
@@ -116,6 +123,7 @@ class ProblemService {
         const response = await fetch(`${this.url}/api/v1/problems/update/${problemId}`,
             {
                 method: "PUT",
+                credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + getCookie("accessToken"),

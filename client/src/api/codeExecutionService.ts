@@ -38,40 +38,6 @@ export class CodeExecutionService {
         }
     }
 
-    async submitCode(code: string, language: number, problemId: number) {
-        const userCookie = getCookie("accessToken");
-        const reqBody = JSON.stringify({ sourceCode: code, languageId: language, problemId: problemId });
-        const options = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${userCookie}`,
-            },
-            body: reqBody,
-        };
-        const apiUrl = `${this.serverUrl}/api/v1/judge/submit`;
-        // will get array of tokens
-        const response = await fetch(apiUrl, options);
-        return response.json();
-    }
-
-    async storeSubmission(submission: any, assignmentId: string | undefined, contestId: string | undefined, problemDifficulty: string) {
-        const userCookie = getCookie("accessToken");
-        console.log("sending submission", submission);
-        const reqBody = JSON.stringify({ submission: submission, assignmentId, contestId, problemDifficulty });
-        const options = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${userCookie}`,
-            },
-            body: reqBody,
-        };
-        const apiUrl = `${this.serverUrl}/api/v1/judge/storeSubmission`;
-        const response = await fetch(apiUrl, options);
-        return response.json();
-    }
-
     async checkStatus(token: string) {
         if (!token) {
             console.error("Token is undefined or null");
@@ -109,16 +75,44 @@ export class CodeExecutionService {
         }
     }
 
+    async submitCode(sourceCode: string, languageId: number, problemId: number) {
+        const response = await fetch(`${this.serverUrl}/api/v1/judge/submit`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + getCookie("accessToken"),
+            },
+            body: JSON.stringify({ sourceCode, languageId, problemId }),
+        });
+        return response.json();
+    }
+
     async getSubmissions() {
-        const userCookie = getCookie("accessToken");
-        const options = {
+        const response = await fetch(`${this.serverUrl}/api/v1/judge/submissions`, {
             method: "GET",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + getCookie("accessToken"),
+            },
+        });
+        return response.json();
+    }
+
+    async storeSubmission(submission: any, assignmentId: string | undefined, contestId: string | undefined, problemDifficulty: string) {
+        const userCookie = getCookie("accessToken");
+        console.log("sending submission", submission);
+        const reqBody = JSON.stringify({ submission: submission, assignmentId, contestId, problemDifficulty });
+        const options = {
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${userCookie}`,
             },
+            body: reqBody,
         };
-        const apiUrl = `${this.serverUrl}/api/v1/judge/getSubmission`;
+        const apiUrl = `${this.serverUrl}/api/v1/judge/storeSubmission`;
         const response = await fetch(apiUrl, options);
         return response.json();
     }

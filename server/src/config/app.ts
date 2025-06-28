@@ -15,6 +15,7 @@ const corsOptions = {
             "http://localhost:3000",
             "http://localhost:8080", 
             "http://10.20.10.111:8080",
+            "http://192.168.1.182:8080",
             process.env.CORS_ORIGIN // Production frontend URL
         ].filter(Boolean); // Remove undefined values
         

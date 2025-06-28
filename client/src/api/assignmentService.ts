@@ -50,8 +50,8 @@ export class AssignmentService {
         return response.json();
     }
 
-    async updateAssignment(assignmentId: any, assignment: any) {
-        const response = await fetch(`${this.url}/api/v1/assignments/${assignmentId}`, {
+    async updateAssignment(assignmentId: string, assignment: any) {
+        const response = await fetch(`${this.url}/api/v1/assignments/update/${assignmentId}`, {
             method: "PUT",
             credentials: "include",
             headers: {
@@ -62,8 +62,19 @@ export class AssignmentService {
         return response.json();
     }
 
+    async deleteAssignment(assignmentId: string) {
+        const response = await fetch(`${this.url}/api/v1/assignments/delete/${assignmentId}`, {
+            method: "DELETE",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        return response.json();
+    }
+
     async getAssignmentDeadline(assignmentId: string) {
-        const response = await fetch(`${this.url}/api/v1/assignments/getAssignmentDeadline/${assignmentId}`, {
+        const response = await fetch(`${this.url}/api/v1/assignments/deadline/${assignmentId}`, {
             method: "GET",
             credentials: "include",
             headers: {
