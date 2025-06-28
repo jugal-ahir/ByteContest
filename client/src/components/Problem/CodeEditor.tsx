@@ -317,7 +317,6 @@ const CodeEditor = ({
 				return;
 			}
 			
-			let i = 0;
 			const testcasesVerdict: Array<testcaseVerdict> = [];
 			
 			// Process each token once
