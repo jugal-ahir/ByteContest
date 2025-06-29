@@ -60,6 +60,13 @@ const UpdateAssignment = () => {
 	}, [assignmentId, setValue]);
 
 	const updateAssignment = async (data: Assignment) => {
+		// Check if assignmentId exists
+		if (!assignmentId) {
+			setMessage("No assignment ID provided.");
+			setErrorModalOpen(true);
+			return;
+		}
+
 		// Convert IST time to UTC for consistent storage and retrieval
 		const convertToIST = (date: Date) => {
 			const dateInUTC = addMinutes(date, -330); // IST is UTC+5:30
