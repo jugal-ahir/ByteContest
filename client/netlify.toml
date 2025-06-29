@@ -1,0 +1,15 @@
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[build.environment]
+  VITE_SERVER_URL = "https://bytecontest-backend.onrender.com"
+  VITE_SOCKET_URL = "https://bytecontest-backend.onrender.com"
+  VITE_RAPIDAPI_URL = "https://judge0-ce.p.rapidapi.com"
+  VITE_RAPIDAPI_HOST = "judge0-ce.p.rapidapi.com"
+  VITE_RAPIDAPI_KEY = "e162a9992emsh2939c0d29bfba0ap1edb23jsn9596f9411172" 

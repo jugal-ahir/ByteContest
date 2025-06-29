@@ -1,1 +1,15 @@
-/*    /index.html   200 
+# Handle client-side routing
+/*    /index.html   200
+
+# Specific routes for better performance
+/auth/*    /index.html   200
+/practice/*    /index.html   200
+/contest/*    /index.html   200
+/assignment/*    /index.html   200
+/dashboard    /index.html   200
+/students    /index.html   200
+/submissions    /index.html   200
+
+# Common redirects for user convenience
+/login    /auth/login    301
+/register    /auth/register    301 

@@ -2,12 +2,17 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ],
   "env": {
-    "VITE_SERVER_URL": "@vite_server_url",
-    "VITE_RAPIDAPI_URL": "@vite_rapidapi_url",
-    "VITE_RAPIDAPI_HOST": "@vite_rapidapi_host",
-    "VITE_RAPIDAPI_KEY": "@vite_rapidapi_key"
+    "VITE_SERVER_URL": "https://bytecontest-backend.onrender.com",
+    "VITE_SOCKET_URL": "https://bytecontest-backend.onrender.com",
+    "VITE_RAPIDAPI_URL": "https://judge0-ce.p.rapidapi.com",
+    "VITE_RAPIDAPI_HOST": "judge0-ce.p.rapidapi.com",
+    "VITE_RAPIDAPI_KEY": "e162a9992emsh2939c0d29bfba0ap1edb23jsn9596f9411172"
   }
 }
