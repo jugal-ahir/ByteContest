@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: bytecontest-frontend
+    env: static
+    plan: free
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_SERVER_URL
+        value: https://bytecontest-backend.onrender.com
+      - key: VITE_SOCKET_URL
+        value: https://bytecontest-backend.onrender.com
+      - key: VITE_RAPIDAPI_URL
+        value: https://judge0-ce.p.rapidapi.com
+      - key: VITE_RAPIDAPI_HOST
+        value: judge0-ce.p.rapidapi.com
+      - key: VITE_RAPIDAPI_KEY
+        sync: false 
