@@ -120,7 +120,7 @@ const UpdateContest = () => {
 					<h2 className="text-2xl text-basecolor font-bold mb-4 text-center">
 						Update Contest
 					</h2>
-					{contest && (
+					{contest && Array.isArray(contest.contestUsers) && contest.contestUsers.length > 0 ? (
 						<form onSubmit={handleSubmit(onSubmit)}>
 							<div className="mb-4">
 								<label
@@ -274,6 +274,8 @@ const UpdateContest = () => {
 								Update Contest
 							</button>
 						</form>
+					) : (
+						<p className="text-center text-error">Contest data not found or contest has no users.</p>
 					)}
 				</div>
 			</div>
