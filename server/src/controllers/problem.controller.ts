@@ -202,9 +202,10 @@ class ProblemController {
 
     async getAllProblems(req: Request, res: Response) {
         try {
-            console.log("Fetching problems")
+            console.log("Fetching problems");
             let problems = await Problem.find();
             const user = req.user as any;
+            console.log("User in getAllProblems:", user);
             if (user && user.userIsAdmin === false) {
                 problems = problems.filter(problem => !problem.problemIsHidden);
             }
@@ -215,6 +216,7 @@ class ProblemController {
             };
             return res.status(200).json(new ApiResponse(200, response, "Problems fetched successfully"));
         } catch (error: any) {
+            console.error("Error in getAllProblems:", error);
             return res.status(400).json(new ApiError(400, error.message));
         }
     };
