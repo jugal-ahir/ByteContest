@@ -21,11 +21,17 @@ const Practice = () => {
 			await problemService
 				.getProblems()
 				.then((data) => {
+					if (!data || !data.data || !Array.isArray(data.data.problems)) {
+						console.error("Invalid problems response", data);
+						setProblems([]);
+						return;
+					}
 					const currProblems: Array<Problem> = data.data.problems;
 					setProblems(currProblems);
 				})
 				.catch((error) => {
 					console.error(error);
+					setProblems([]);
 				});
 		}
 		getProblems();
