@@ -204,9 +204,9 @@ class ProblemController {
         try {
             console.log("Fetching problems")
             let problems = await Problem.find();
-            if (req.body.user.userIsAdmin === false) {
+            const user = req.user as any;
+            if (user && user.userIsAdmin === false) {
                 problems = problems.filter(problem => !problem.problemIsHidden);
-
             }
             const response: IProblemFunctionResponse = {
                 ok: true,
@@ -263,7 +263,8 @@ class ProblemController {
                 return res.status(200).json(new ApiError(404, "Problem not found"));
             }
 
-            if (req.body.user.userIsAdmin === false && problem.problemIsHidden) {
+            const user = req.user as any;
+            if (user && user.userIsAdmin === false && problem.problemIsHidden) {
                 return res.status(200).json(new ApiError(404, "Problem is hidden"));
             }
             const response: IProblemFunctionResponse = {
@@ -345,8 +346,9 @@ class ProblemController {
                 return res.status(200).json(new ApiError(404, "Editorial not found"));
             }
             console.log(editorial)
-            console.log(req.body.user.userIsAdmin);
-            if (req.body.user.userIsAdmin) {
+            const user = req.user as any;
+            console.log(user?.userIsAdmin);
+            if (user && user.userIsAdmin) {
                 const response: IEditorialFunctionResponse = {
                     ok: true,
                     message: "Editorial fetched successfully",
