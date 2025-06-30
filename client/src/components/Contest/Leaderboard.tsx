@@ -76,7 +76,7 @@ const LeaderboardTab = ({ contestUsers }: LeaderboardTabProps) => {
 			.map((user, index) => [
 				index + 1,
 				user.contestUserName,
-				user.contestUserRollNumber,
+				user?.contestUserRollNumber || "",
 				...(user.contestUserProblemStatus?.map((problem) => problem.problemScore) || []),
 				user.contestUserCurrentMarks,
 			]);
@@ -126,7 +126,7 @@ const LeaderboardTab = ({ contestUsers }: LeaderboardTabProps) => {
 							)
 							.map((user, index) => (
 								<tr
-									key={user.contestUserRollNumber}
+									key={user?.contestUserRollNumber || ""}
 									className={`border-t border-gray-200 ${
 										index % 2 === 0 ? "bg-gray-50" : "bg-white"
 									}`}>
@@ -134,26 +134,26 @@ const LeaderboardTab = ({ contestUsers }: LeaderboardTabProps) => {
 										{index + 1}
 									</td>
 									<td className="py-3 px-6 font-semibold text-gray-700">
-										{user.contestUserName}
+										{user?.contestUserName}
 									</td>
 									<td className="py-3 px-6 font-semibold text-gray-700">
-										{user.contestUserRollNumber}
+										{user?.contestUserRollNumber || ""}
 									</td>
-									{user.contestUserProblemStatus?.map((problem) => (
+									{user?.contestUserProblemStatus?.map((problem) => (
 										<td
 											key={problem.problemId}
 											className="py-3 px-6 font-semibold text-gray-700"
 											onClick={() =>
 												handleProblemClick(
 													problem.problemId,
-													user.contestUserRollNumber,
+													user?.contestUserRollNumber || "",
 												)
 											}>
 											{problem.problemScore}
 										</td>
 									)) || <td className="py-3 px-6 font-semibold text-gray-700">-</td>}
 									<td className="py-3 px-6 font-semibold text-gray-700">
-										{user.contestUserCurrentMarks} Marks
+										{user?.contestUserCurrentMarks} Marks
 									</td>
 								</tr>
 							))}

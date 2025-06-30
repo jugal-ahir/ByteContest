@@ -41,7 +41,7 @@ const PastContestsTable: React.FC = () => {
 							const contestUser: ContestUser | undefined =
 								contest.contestUsers.find(
 									(contestUser: ContestUser) =>
-										contestUser.contestUserRollNumber === user?.userRollNumber,
+										contestUser?.contestUserRollNumber === (user?.userRollNumber || ""),
 								);
 							console.log(contestUser);
 							console.log(contest);

@@ -27,7 +27,7 @@ const ContestCard: React.FC<ContestCardProps> = ({
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const userMarks = contest.contestUsers.find(
-		(contestUser) => contestUser.contestUserRollNumber === user?.rollNumber,
+		(contestUser) => contestUser?.contestUserRollNumber === (user?.rollNumber || "")
 	)?.contestUserCurrentMarks;
 
 	// Check if the contest is ongoing

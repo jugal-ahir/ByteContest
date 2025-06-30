@@ -63,7 +63,7 @@ const StudentContestPage = () => {
 	if (!contest) return <div>Loading...</div>;
 
 	const contestUser = contest.contestUsers.find(
-		(contestUser) => contestUser.contestUserRollNumber === user?.userRollNumber,
+		(contestUser) => contestUser?.contestUserRollNumber === (user?.userRollNumber || "")
 	);
 
 	return (
@@ -126,7 +126,7 @@ const StudentContestPage = () => {
 									</p>
 									<p>
 										<strong>Roll Number:</strong>{" "}
-										{contestUser.contestUserRollNumber}
+										{contestUser?.contestUserRollNumber || ""}
 									</p>
 									<p>
 										<strong>Current Marks:</strong>{" "}

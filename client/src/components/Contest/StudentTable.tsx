@@ -16,7 +16,7 @@ const StudentTable = ({ students }: StudentTableProps) => {
 		if (!contestId) return;
 		const response = await contestService.retainContestUser(
 			contestId,
-			student.contestUserRollNumber,
+			student?.contestUserRollNumber || "",
 		);
 		if (response.data.ok) {
 			setMessage("Student retained successfully.");
@@ -50,16 +50,16 @@ const StudentTable = ({ students }: StudentTableProps) => {
 						<tbody className="divide-y divide-gray-200">
 							{students.map((student) => (
 								<tr
-									key={student.contestUserRollNumber}
+									key={student?.contestUserRollNumber}
 									className="hover:bg-gray-100">
 									<td className="px-6 py-4 whitespace-nowrap text-md text-gray-800">
-										{student.contestUserRollNumber}
+										{student?.contestUserRollNumber || ""}
 									</td>
 									<td className="px-6 py-4 whitespace-nowrap text-md text-gray-800">
-										{student.contestUserName}
+										{student?.contestUserName}
 									</td>
 									<td className="px-6 py-4 whitespace-nowrap text-md text-gray-800">
-										{student.contestUserCurrentMarks}
+										{student?.contestUserCurrentMarks}
 									</td>
 									<td className="px-6 py-4 whitespace-nowrap">
 										<button
