@@ -25,10 +25,9 @@ const UpdateContest = () => {
 		if (contestId) {
 			const fetchContest = async () => {
 				const response = await contestService.getContest(contestId);
-				if (response.data.ok) {
+				if (response.data && response.data.ok && response.data.contest) {
 					const contestData = response.data.contest;
 					setContest(contestData);
-
 					// Set form data with current contest details
 					setValue("contestId", contestData.contestId);
 					setValue("contestName", contestData.contestName);
@@ -44,7 +43,8 @@ const UpdateContest = () => {
 					);
 					setProblems(contestData.contestProblems);
 				} else {
-					setMessage(response.message);
+					setContest(null);
+					setMessage(response.message || "Contest not found or error fetching contest.");
 					setErrorModalOpen(true);
 				}
 			};
