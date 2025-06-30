@@ -58,8 +58,7 @@ export class AuthService {
             method: "POST",
             credentials: "include",
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + getCookie("accessToken"),
+                "Content-Type": "application/json"
             }
         });
         return response.json();

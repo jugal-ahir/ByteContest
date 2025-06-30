@@ -13,8 +13,7 @@ class ProblemService {
                 method: "GET",
                 credentials: "include",
                 headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer " + getCookie("accessToken"),
+                    "Content-Type": "application/json"
                 },
             }
         );
@@ -104,8 +103,7 @@ class ProblemService {
                 method: "POST",
                 credentials: "include",
                 headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer " + getCookie("accessToken"),
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify(problem),
             }
@@ -125,10 +123,36 @@ class ProblemService {
                 method: "PUT",
                 credentials: "include",
                 headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer " + getCookie("accessToken"),
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify(problem),
+            }
+        );
+        return response.json();
+    }
+
+    async deleteProblem(problemId: string) {
+        const response = await fetch(`${this.url}/api/v1/problems/delete/${problemId}`,
+            {
+                method: "DELETE",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            }
+        );
+        return response.json();
+    }
+
+    async getProblemByIds(problemsIds: string[]) {
+        const response = await fetch(`${this.url}/api/v1/problems/getProblemByIds`,
+            {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ problemIds: problemsIds }),
             }
         );
         return response.json();
