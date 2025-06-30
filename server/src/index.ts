@@ -1,3 +1,4 @@
+/// <reference path="./types/custom.d.ts" />
 import dotenv from "dotenv";
 dotenv.config({     // configure dotenv
     path: "./.env"  // set path of env
