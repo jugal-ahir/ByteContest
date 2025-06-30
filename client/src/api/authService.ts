@@ -1,4 +1,3 @@
-import { getCookie } from "../lib/cookieUtility";
 import { User } from "../types/user";
 export class AuthService {
     url;
