@@ -4,31 +4,15 @@ import cookieParser from "cookie-parser"; // Middleware used for parsing cookies
 
 const app = express();
 
-// Updated CORS options for production
+const allowedOrigins = [
+    "https://bytecontest.onrender.com",
+    "http://localhost:3000",
+    "http://localhost:8080"
+];
+
 const corsOptions = {
-    origin: function (
-        origin: string | undefined,
-        callback: (error?: any, allow?: boolean) => void
-    ) {
-        // Allow requests from specific origins
-        const allowedOrigins = [
-            "http://localhost:3000",
-            "http://localhost:8080", 
-            "http://10.20.10.111:8080",
-            "http://192.168.1.182:8080",
-            process.env.CORS_ORIGIN // Production frontend URL
-        ].filter(Boolean); // Remove undefined values
-        
-        if (!origin || allowedOrigins.includes(origin)) {
-            // Allow requests from allowed origins or without origin (like Postman)
-            callback(null, true);
-        } else {
-            // Block requests from other origins
-            console.log("CORS blocked origin:", origin);
-            callback(new Error("Not allowed by CORS"));
-        }
-    },
-    credentials: true, // Reflect (pass through) the request's credentials
+    origin: allowedOrigins,
+    credentials: true,
 };
 
 // Apply CORS middleware

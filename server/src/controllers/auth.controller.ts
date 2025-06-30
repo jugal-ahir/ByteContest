@@ -36,9 +36,8 @@ class AuthController {
         const cookieOptions = {
             maxAge: 18000000, // 5 hours
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production', // Only use secure in production
-            sameSite: (process.env.NODE_ENV === 'production' ? 'none' : 'lax') as 'none' | 'lax',
-            domain: process.env.NODE_ENV === 'production' ? undefined : undefined // Let browser handle domain
+            secure: true, // Always true for HTTPS on Render
+            sameSite: 'none' as 'none', // Required for cross-site cookies
         };
 
         return res
@@ -76,9 +75,8 @@ class AuthController {
         const cookieOptions = {
             maxAge: 18000000, // 5 hours
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production', // Only use secure in production
-            sameSite: (process.env.NODE_ENV === 'production' ? 'none' : 'lax') as 'none' | 'lax',
-            domain: process.env.NODE_ENV === 'production' ? undefined : undefined // Let browser handle domain
+            secure: true, // Always true for HTTPS on Render
+            sameSite: 'none' as 'none', // Required for cross-site cookies
         };
 
         return res
@@ -126,9 +124,8 @@ class AuthController {
         // Configure cookie options for production
         const cookieOptions = {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: (process.env.NODE_ENV === 'production' ? 'none' : 'lax') as 'none' | 'lax',
-            domain: process.env.NODE_ENV === 'production' ? undefined : undefined
+            secure: true, // Always true for HTTPS on Render
+            sameSite: 'none' as 'none', // Required for cross-site cookies
         };
 
         // Your logout logic here
