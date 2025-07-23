@@ -11,7 +11,7 @@ const corsOptions = {
         callback: (error?: any, allow?: boolean) => void
     ) {
         // Allow requests from specific origins
-        if (!origin || origin.startsWith("http://localhost") || origin.startsWith("http://10.20.10.111") || origin.startsWith("http://192.168.1.181") || origin.startsWith("https://odinlabs-server.onrender.com")) {
+        if (!origin || origin.startsWith("http://localhost") || origin.startsWith("http://10.20.10.111") || origin.startsWith("https://byte-contest.vercel.app") || origin.startsWith("https://odinlabs-server.onrender.com")) {
             // Allow requests from any localhost origin or without origin (like Postman)
             callback(null, true);
         } else {
