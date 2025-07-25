@@ -7,17 +7,21 @@ class ProblemService {
     }
 
     async getProblems() {
-        console.log(this.url);
+        console.log("Fetching problems from:", this.url);
+        const token = getCookie("accessToken");
+        console.log("Token available:", token ? "Yes" : "No");
+        
         const response = await fetch(`${this.url}/api/v1/problems/all`,
             {
                 method: "GET",
+                credentials: "include", // Include cookies in the request
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer " + getCookie("accessToken"),
+                    "Authorization": "Bearer " + token,
                 },
             }
         );
-        console.log(response);
+        console.log("Problems response status:", response.status);
         if (!response.ok) {
             throw new Error("Error fetching problems");
         }
@@ -25,12 +29,14 @@ class ProblemService {
     }
 
     async getProblem(problemId: string) {
+        const token = getCookie("accessToken");
         const response = await fetch(`${this.url}/api/v1/problems/${problemId}`,
             {
                 method: "GET",
+                credentials: "include", // Include cookies in the request
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer " + getCookie("accessToken"),
+                    "Authorization": "Bearer " + token,
                 },
             }
         );
@@ -38,12 +44,14 @@ class ProblemService {
     }
 
     async getPracticeProblem(problemId: string,) {
+        const token = getCookie("accessToken");
         const response = await fetch(`${this.url}/api/v1/problems/practice/${problemId}`,
             {
                 method: "GET",
+                credentials: "include", // Include cookies in the request
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer " + getCookie("accessToken"),
+                    "Authorization": "Bearer " + token,
                 },
             }
         );
@@ -51,12 +59,14 @@ class ProblemService {
     }
 
     async changeProblemStatus(problemId: string, problemIsHidden: boolean) {
+        const token = getCookie("accessToken");
         const response = await fetch(`${this.url}/api/v1/problems/${problemId}/${problemIsHidden}`,
             {
                 method: "PUT",
+                credentials: "include", // Include cookies in the request
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer " + getCookie("accessToken"),
+                    "Authorization": "Bearer " + token,
                 },
             }
         );
@@ -64,13 +74,15 @@ class ProblemService {
     }
 
     async getEditorialById(problemId: string) {
+        const token = getCookie("accessToken");
         const editorialId = problemId;
         const response = await fetch(`${this.url}/api/v1/problems/editorial/${editorialId}`,
             {
                 method: "GET",
+                credentials: "include", // Include cookies in the request
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer " + getCookie("accessToken"),
+                    "Authorization": "Bearer " + token,
                 },
             }
         );
@@ -79,12 +91,14 @@ class ProblemService {
     }
 
     async changeProblemEditorialStatus(problemId: string, problemEditorialIsHidden: boolean) {
+        const token = getCookie("accessToken");
         const response = await fetch(`${this.url}/api/v1/problems/editorial/${problemId}/${problemEditorialIsHidden}`,
             {
                 method: "PUT",
+                credentials: "include", // Include cookies in the request
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer " + getCookie("accessToken"),
+                    "Authorization": "Bearer " + token,
                 },
             }
         );
@@ -93,12 +107,14 @@ class ProblemService {
     }
 
     async createProblem(problem: any) {
+        const token = getCookie("accessToken");
         const response = await fetch(`${this.url}/api/v1/problems/create`,
             {
                 method: "POST",
+                credentials: "include", // Include cookies in the request
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer " + getCookie("accessToken"),
+                    "Authorization": "Bearer " + token,
                 },
                 body: JSON.stringify(problem),
             }
@@ -107,12 +123,14 @@ class ProblemService {
     }
 
     async updateProblem(problemId: string, problem: any) {
+        const token = getCookie("accessToken");
         const response = await fetch(`${this.url}/api/v1/problems/update/${problemId}`,
             {
                 method: "PUT",
+                credentials: "include", // Include cookies in the request
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer " + getCookie("accessToken"),
+                    "Authorization": "Bearer " + token,
                 },
                 body: JSON.stringify(problem),
             }
