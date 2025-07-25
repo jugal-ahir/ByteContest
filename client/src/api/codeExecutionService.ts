@@ -29,6 +29,7 @@ export class CodeExecutionService {
         const reqBody = JSON.stringify({ sourceCode: code, languageId: language, problemId: problemId });
         const options = {
             method: "POST",
+            credentials: "include" as RequestCredentials, // Include cookies in the request
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${userCookie}`,
@@ -47,6 +48,7 @@ export class CodeExecutionService {
         const reqBody = JSON.stringify({ submission: submission, assignmentId, contestId, problemDifficulty });
         const options = {
             method: "POST",
+            credentials: "include" as RequestCredentials, // Include cookies in the request
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${userCookie}`,
@@ -77,6 +79,7 @@ export class CodeExecutionService {
         const userCookie = getCookie("accessToken");
         const options = {
             method: "GET",
+            credentials: "include" as RequestCredentials, // Include cookies in the request
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${userCookie}`,
@@ -91,6 +94,7 @@ export class CodeExecutionService {
         const userCookie = getCookie("accessToken");
         const options = {
             method: "GET",
+            credentials: "include" as RequestCredentials, // Include cookies in the request
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${userCookie}`,
