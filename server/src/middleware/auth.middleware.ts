@@ -7,7 +7,13 @@ import { Request, Response, NextFunction } from "express"
 export const verifyJWT = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
 
     try {
+        // Try to get token from cookies first, then from Authorization header
         const accessToken = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "");
+
+        // Log for debugging
+        console.log("Auth middleware - Token:", accessToken ? "Token found" : "No token");
+        console.log("Auth middleware - Cookies:", req.cookies);
+        console.log("Auth middleware - Headers:", req.headers.authorization);
 
         // if user doesn't have access tokens then send error
         if (!accessToken) {
@@ -34,6 +40,7 @@ export const verifyJWT = asyncHandler(async (req: Request, res: Response, next: 
         req.body.user = user;
         next();
     } catch (error: any) {
+        console.error("Auth middleware error:", error);
         throw new ApiError(401, error?.message || "User not authenticated!!");
     }
 
