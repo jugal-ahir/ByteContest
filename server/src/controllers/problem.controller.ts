@@ -176,12 +176,17 @@ class ProblemController {
 
     async getAllProblems(req: Request, res: Response) {
         try {
-            console.log("Fetching problems")
+            console.log("Fetching problems");
             let problems = await Problem.find();
-            if (req.body.user.userIsAdmin === false) {
+            
+            // Check if user exists in req.body and has userIsAdmin property
+            const isAdmin = req.body.user && req.body.user.userIsAdmin === true;
+            
+            // If not admin, filter out hidden problems
+            if (!isAdmin) {
                 problems = problems.filter(problem => !problem.problemIsHidden);
-
             }
+            
             const response: IProblemFunctionResponse = {
                 ok: true,
                 message: "Problems fetched successfully",
@@ -189,7 +194,8 @@ class ProblemController {
             };
             return res.status(200).json(new ApiResponse(200, response, "Problems fetched successfully"));
         } catch (error: any) {
-            return res.status(400).json(new ApiError(400, error.message));
+            console.error("Error fetching problems:", error);
+            return res.status(500).json(new ApiError(500, error.message));
         }
     };
 
@@ -237,9 +243,11 @@ class ProblemController {
                 return res.status(200).json(new ApiError(404, "Problem not found"));
             }
 
-            if (req.body.user.userIsAdmin === false && problem.problemIsHidden) {
+            // Check if user exists and is not admin
+            if (req.body.user && req.body.user.userIsAdmin === false && problem.problemIsHidden) {
                 return res.status(200).json(new ApiError(404, "Problem is hidden"));
             }
+            
             const response: IProblemFunctionResponse = {
                 ok: true,
                 message: "Problem fetched successfully",
@@ -318,9 +326,11 @@ class ProblemController {
             if (!editorial) {
                 return res.status(200).json(new ApiError(404, "Editorial not found"));
             }
-            console.log(editorial)
-            console.log(req.body.user.userIsAdmin);
-            if (req.body.user.userIsAdmin) {
+            
+            // Check if user exists and is admin
+            const isAdmin = req.body.user && req.body.user.userIsAdmin === true;
+            
+            if (isAdmin) {
                 const response: IEditorialFunctionResponse = {
                     ok: true,
                     message: "Editorial fetched successfully",
@@ -328,9 +338,11 @@ class ProblemController {
                 };
                 return res.status(200).json(new ApiResponse(200, response, "Editorial fetched successfully"));
             }
+            
             if (editorial.editorialIsHidden) {
                 return res.status(200).json(new ApiError(404, "Editorial is hidden"));
             }
+            
             const response: IEditorialFunctionResponse = {
                 ok: true,
                 message: "Editorial fetched successfully",
