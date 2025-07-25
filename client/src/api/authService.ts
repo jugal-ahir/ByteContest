@@ -52,11 +52,13 @@ export class AuthService {
     }
 
     async logout() {
+        const token = getCookie("accessToken");
         const response = await fetch(`${this.url}/api/v1/auth/logout`, {
             method: "POST",
+            credentials: "include", // Include cookies in the request
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + getCookie("accessToken"),
+                "Authorization": "Bearer " + token,
             }
         });
         return response.json();
