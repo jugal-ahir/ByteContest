@@ -35,6 +35,9 @@ class AuthController {
             .status(201)
             .cookie("accessToken", accessToken, {
                 maxAge: 18000000, //5 hours
+                httpOnly: true,
+                secure: true, // Only send cookie over HTTPS
+                sameSite: 'none', // Allow cross-site cookies
             }
             )
             .json(
@@ -68,6 +71,9 @@ class AuthController {
         return res
             .cookie("accessToken", accessToken, {
                 maxAge: 18000000, //5 hours
+                httpOnly: true,
+                secure: true, // Only send cookie over HTTPS
+                sameSite: 'none', // Allow cross-site cookies
             }
             )
             .json(
@@ -114,7 +120,11 @@ class AuthController {
         // remove access tokens
         return res
             .status(200)
-            .clearCookie("accessToken")
+            .clearCookie("accessToken", {
+                httpOnly: true,
+                secure: true,
+                sameSite: 'none',
+            })
             .json(
                 new ApiResponse(
                     200,
