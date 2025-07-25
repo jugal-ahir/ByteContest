@@ -1,3 +1,5 @@
+import { getCookie } from "../lib/cookieUtility";
+
 export class UserService {
     url;
     constructor() {
@@ -5,11 +7,13 @@ export class UserService {
     }
 
     async getUsersFromSection(section: string) {
+        const token = getCookie("accessToken");
         const response = await fetch(`${this.url}/api/v1/users/getUsersFromSection`, {
             method: "POST",
             credentials: "include",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": "Bearer " + token,
             },
             body: JSON.stringify({ section }),
         });
@@ -17,22 +21,26 @@ export class UserService {
     }
 
     async getUser(userRollNumber: string) {
+        const token = getCookie("accessToken");
         const response = await fetch(`${this.url}/api/v1/users/getUser/${userRollNumber}`, {
             method: "GET",
             credentials: "include",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": "Bearer " + token,
             },
         });
         return await response.json();
     }
 
     async editUser(userEmail: string, userName: string, userRollNumber: string, userSection: string, userTeamName: string) {
+        const token = getCookie("accessToken");
         const response = await fetch(`${this.url}/api/v1/users/edituser/${userRollNumber}`, {
             method: "PUT",
             credentials: "include",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": "Bearer " + token,
             },
             body: JSON.stringify({ userEmail, userName, userRollNumber, userSection, userTeamName }),
         });
@@ -40,11 +48,13 @@ export class UserService {
     }
 
     async deleteUser(userEmail: string) {
+        const token = getCookie("accessToken");
         const response = await fetch(`${this.url}/api/v1/users/deleteuser/${userEmail}`, {
             method: "DELETE",
             credentials: "include",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": "Bearer " + token,
             },
             body: JSON.stringify({ userEmail }),
         });
@@ -52,12 +62,13 @@ export class UserService {
     }
 
     async changeUserSecret(userEmail: string) {
+        const token = getCookie("accessToken");
         const response = await fetch(`${this.url}/api/v1/users/changeUserSecret`, {
             method: "POST",
             credentials: "include",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem("accessToken")}`,
+                "Authorization": "Bearer " + token,
             },
             body: JSON.stringify({ userEmail }),
         });
