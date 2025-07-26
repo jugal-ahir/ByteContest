@@ -18,7 +18,7 @@ class ProblemService {
                     credentials: "include", // Include cookies in the request
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": "Bearer " + token,
+                        // "Authorization": "Bearer " + token,
                     },
                 }
             );
@@ -46,7 +46,7 @@ class ProblemService {
                     credentials: "include", // Include cookies in the request
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": "Bearer " + token,
+                        //"Authorization": "Bearer " + token,
                     },
                 }
             );
@@ -72,7 +72,7 @@ class ProblemService {
                     credentials: "include", // Include cookies in the request
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": "Bearer " + token,
+                        //"Authorization": "Bearer " + token,
                     },
                 }
             );
@@ -98,7 +98,7 @@ class ProblemService {
                     credentials: "include", // Include cookies in the request
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": "Bearer " + token,
+                        //"Authorization": "Bearer " + token,
                     },
                 }
             );
@@ -125,7 +125,7 @@ class ProblemService {
                     credentials: "include", // Include cookies in the request
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": "Bearer " + token,
+                       // "Authorization": "Bearer " + token,
                     },
                 }
             );
@@ -151,7 +151,7 @@ class ProblemService {
                     credentials: "include", // Include cookies in the request
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": "Bearer " + token,
+                       // "Authorization": "Bearer " + token,
                     },
                 }
             );
@@ -177,7 +177,7 @@ class ProblemService {
                     credentials: "include", // Include cookies in the request
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": "Bearer " + token,
+                       // "Authorization": "Bearer " + token,
                     },
                     body: JSON.stringify(problem),
                 }
@@ -204,7 +204,7 @@ class ProblemService {
                     credentials: "include", // Include cookies in the request
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": "Bearer " + token,
+                       // "Authorization": "Bearer " + token,
                     },
                     body: JSON.stringify(problem),
                 }
