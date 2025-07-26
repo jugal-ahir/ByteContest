@@ -1,16 +1,24 @@
+import { getCookie } from "../lib/cookieUtility";
+
 export class ContestService {
     url;
     constructor() {
         this.url = import.meta.env.VITE_SERVER_URL;
     }
 
+    getAuthHeaders() {
+        const token = getCookie("accessToken");
+        return {
+            "Content-Type": "application/json",
+            ...(token && { Authorization: "Bearer " + token }),
+        };
+    }
+
     async getAllContests() {
         const response = await fetch(`${this.url}/api/v1/contests/getAllContests`, {
             method: "GET",
             credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: this.getAuthHeaders(),
         });
         return response.json();
     }
@@ -19,9 +27,7 @@ export class ContestService {
         const response = await fetch(`${this.url}/api/v1/contests/${contestId}`, {
             method: "GET",
             credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: this.getAuthHeaders(),
         });
         return response.json();
     }
@@ -30,9 +36,7 @@ export class ContestService {
         const response = await fetch(`${this.url}/api/v1/problems/getProblemByIds`, {
             method: "POST",
             credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: this.getAuthHeaders(),
             body: JSON.stringify({ problemIds: problemsIds }),
         });
         return response.json();
@@ -42,9 +46,7 @@ export class ContestService {
         const response = await fetch(`${this.url}/api/v1/contests/create`, {
             method: "POST",
             credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: this.getAuthHeaders(),
             body: JSON.stringify(contest),
         });
         return response.json();
@@ -54,9 +56,7 @@ export class ContestService {
         const response = await fetch(`${this.url}/api/v1/contests/getContestDeadline/${contestId}`, {
             method: "GET",
             credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: this.getAuthHeaders(),
         });
         return response.json();
     }
@@ -65,9 +65,7 @@ export class ContestService {
         const response = await fetch(`${this.url}/api/v1/contests/${contestId}`, {
             method: "PUT",
             credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: this.getAuthHeaders(),
             body: JSON.stringify(contest),
         });
         return response.json();
@@ -77,9 +75,7 @@ export class ContestService {
         const response = await fetch(`${this.url}/api/v1/contests/delete/${contestId}`, {
             method: "DELETE",
             credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: this.getAuthHeaders(),
         });
         return response.json();
     }
@@ -88,9 +84,7 @@ export class ContestService {
         const response = await fetch(`${this.url}/api/v1/contests/signIn/${contestId}`, {
             method: "POST",
             credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: this.getAuthHeaders(),
         });
         return response.json();
     }
@@ -99,9 +93,7 @@ export class ContestService {
         const response = await fetch(`${this.url}/api/v1/contests/logActivity/${contestId}`, {
             method: "POST",
             credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: this.getAuthHeaders(),
             body: JSON.stringify({ activity }),
         });
         return response.json();
@@ -111,9 +103,7 @@ export class ContestService {
         const response = await fetch(`${this.url}/api/v1/contests/getActivity/${contestId}`, {
             method: "GET",
             credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: this.getAuthHeaders(),
         });
         return response.json();
     }
@@ -122,27 +112,21 @@ export class ContestService {
         const response = await fetch(`${this.url}/api/v1/contests/retainUser`, {
             method: "POST",
             credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: this.getAuthHeaders(),
             body: JSON.stringify({ contestId, userRollNumber: contestUserRollNumber }),
         });
         return response.json();
-
     }
 
     async updateContestDeadline(contest: any) {
         const response = await fetch(`${this.url}/api/v1/contests/updateDeadline`, {
             method: "PUT",
             credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: this.getAuthHeaders(),
             body: JSON.stringify(contest),
         });
         return response.json();
     }
-
-};
+}
 
 export const contestService = new ContestService();
